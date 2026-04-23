@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict, FiniteFloat
 from sqlalchemy.orm import DeclarativeBase
 from enum import Enum
 from sqlalchemy.orm import Mapped, mapped_column
@@ -12,7 +12,6 @@ class Status(Enum):
     TODO = "TODO"
     IN_PROGRESS = "In progress"
     DONE = "Done"
-    TEST = "test"
 
 
 class TaskCreate(BaseModel):
@@ -35,6 +34,15 @@ class TaskUpdate(BaseModel):
     priority: int | None = None
     assignee: str | None = None
     status: Status | None = None
+
+
+# converting sqlalchemy DeclarativeBase model to pydantic BaseModel
+class PydanticTask(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    body: str = Field(alias="body")
+    priority: int = Field(alias="priority")
+    assignee: str = Field(alias="assignee")
+    status: Status = Field(alias="status")
 
 
 class Task(Base):

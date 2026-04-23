@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todo App</title>
+  </head> 
+  <body>
+    <h1>VERY simple TODO app</h1>
+  </body>
+
+  <form>
+    <div align="right">
+      <h3>Get Task</h3>
+      <label for="name">ID:</label>
+      <input
+        type="text"
+        id="id"
+        size="10" 
+      />
+      <button type="button" onclick=getTask()>Get task</button>
+      <div id="task"></div>
+    </div>
+  </form>
+
+  <form>
+  <h3>Create Task</h3>
+
+    <div>
+      <label for="name">Body:</label>
+      <input
+        type="text"
+        id="body"
+        maxlength="255"
+        size="10" 
+      />
+    </div>
+
+    <div>
+      <label for="name">Priority:</label>
+      <input
+        type="number"
+        id="priority"
+        size="10"
+      /> 
+    </div>
+
+    <div>
+      <label for="name">Assignee:</label>
+      <input
+        type="text"
+        id="assignee"
+        maxlength="255"
+        size="10" 
+      />
+    </div>
+
+    <div>
+      <label for="name">Status:</label>
+      <input
+        type="text"
+        id="status"
+        maxlength="255"
+        size="10" 
+      />
+    </div>
+    <button type="button" onclick=createTask()>Create task</button>
+  </form>
+
+  <form onload="getTasks()">
+    <div align="right">
+      <h3>Current tasks</h3>
+      <button type="button" onclick=getTasks()>Get tasks</button>
+      <div id="tasklist"></div>
+    </div>
+  </form>
+
+  <form>
+    <div align="left">
+      <h3>Delete Task</h3>
+      <label for="name">ID:</label>
+      <input
+        type="text"
+        id="delete"
+        size="10" 
+      />
+      <button type="button" onclick=deleteTask()>Delete task</button>
+      <div id="taskdeleted">
+      </div>
+      <h4 hidden="flag">Task have been deleted</h4>
+    </div>
+  </form>
+
+  <form>
+
+    <div align="right">
+      <h3>Update Task</h3>
+      <div align="right">
+        <label for="name">ID:</label>
+        <input
+          type="text"
+          id="id_upd"
+          size="10" 
+        />
+      </div>
+
+       <div>
+         <label for="name">Body:</label>
+         <input
+           type="text"
+           id="body_upd"
+           maxlength="255"
+           size="10" 
+         />
+       </div>
+ 
+       <div>
+         <label for="name">Priority:</label>
+         <input
+           type="text"
+           id="priority_upd"
+           size="10"
+         /> 
+       </div>
+ 
+       <div>
+         <label for="name">Assignee:</label>
+         <input
+           type="text"
+           id="assignee_upd"
+           maxlength="255"
+           size="10" 
+         />
+       </div>
+ 
+       <div>
+         <label for="name">Status:</label>
+         <input
+           type="text"
+           id="status_upd"
+           maxlength="255"
+           size="10" 
+         />
+       </div>
+      <button type="button" onclick=updateTask()>Update task</button>
+    </div>
+  </form>
+
+  <script src="app.js"></script>
+</html>

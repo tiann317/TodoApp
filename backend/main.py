@@ -1,14 +1,29 @@
 from fastapi import FastAPI, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Any
 from sqlalchemy.orm import Session
 from .database import engine, SessionLocal
-from .models import Base
-from .models import TaskRead, TaskUpdate, TaskCreate
-from .db_crud import db_task_create, db_task_delete, db_task_get, db_task_update
+from .models import Base, PydanticTask
+from .models import TaskRead, TaskUpdate, TaskCreate, Task
+from .db_crud import (
+    db_task_create,
+    db_task_delete,
+    db_task_get,
+    db_task_update,
+    db_tasks_get,
+)
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def get_db():
@@ -30,6 +45,14 @@ async def read_task(task_id: int, db: Session = Depends(get_db)) -> Any:
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
     return task
+
+
+@app.get("/tasks/", response_model=list[PydanticTask], status_code=200)
+async def read_tasks(db: Session = Depends(get_db)) -> Any:
+    tasks = db_tasks_get(db)
+    if not tasks:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return tasks
 
 
 @app.post("/tasks/", response_model=TaskRead, status_code=201)
@@ -55,4 +78,4 @@ async def delete_task(task_id: int, db: Session = Depends(get_db)):
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
     db_task_delete(db, task_id)
-    return {"Task is successfully deleted"}
+    return {"Task is successfully deleted": "OK"}

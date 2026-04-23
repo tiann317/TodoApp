@@ -41,6 +41,10 @@ def db_task_get(db: Session, id: int):
     return task
 
 
+def db_tasks_get(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(Task).offset(skip).limit(limit).all()
+
+
 def db_task_update(db: Session, id: int, upd: TaskUpdate):
     stmt = (
         update(Task)
