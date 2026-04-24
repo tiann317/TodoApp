@@ -14,6 +14,14 @@ article {
   @apply text-base font-medium mb-3;
 }
 
+.listing-heading {
+  @apply text-sm font-medium;
+}
+
+.listing-assignee {
+  @apply text-xs text-gray-500;
+}
+
 ul {
   @apply space-y-2;
 }

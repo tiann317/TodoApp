@@ -7,7 +7,7 @@ import { RouterOutlet, RouterLink } from '@angular/router';
   imports: [RouterOutlet, RouterLink],
   styleUrl: './app.css',
   template: `
-    <main>
+    <main class="container page">
       <a [routerLink]="['/']">
         <section>
           <form>

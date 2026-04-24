@@ -2,6 +2,7 @@ import { Component, input } from '@angular/core';
 import { Taskschema } from '../taskschema';
 import { RouterLink } from "@angular/router";
 
+/*TODO: make the listheading a routerLink to task details*/
 @Component({
   selector: 'app-taskbanner',
   imports: [RouterLink],

@@ -1,8 +1,11 @@
 @import 'tailwindcss';
 
+.search-bar {
+  @apply flex gap-2 items-center;
+}
+
 .results {
-  @apply grid gap-4 mt-12 justify-around;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  @apply mt-4 space-y-2;
 }
 
 input[type="text"] {
