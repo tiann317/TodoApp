@@ -39,6 +39,7 @@ class TaskUpdate(BaseModel):
 # converting sqlalchemy DeclarativeBase model to pydantic BaseModel
 class PydanticTask(BaseModel):
     model_config = ConfigDict(from_attributes=True)
+    id: int = Field(alias="id")
     body: str = Field(alias="body")
     priority: int = Field(alias="priority")
     assignee: str = Field(alias="assignee")
