@@ -1,11 +1,14 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Any
+from sqlalchemy import null
 from sqlalchemy.orm import Session
-from .database import engine, SessionLocal
-from .models import Base, PydanticTask
-from .models import TaskRead, TaskUpdate, TaskCreate, Task
-from .db_crud import (
+from database.database import engine, SessionLocal
+from database.models import Base
+from database.models import TaskPublic, TaskUpdate, TaskCreate, Task
+import uvicorn
+
+from database.db_crud import (
     db_task_create,
     db_task_delete,
     db_task_get,
@@ -39,7 +42,7 @@ async def read_root():
     return {"msg": "OK"}
 
 
-@app.get("/tasks/{task_id}", response_model=TaskRead, status_code=200)
+@app.get("/tasks/{task_id}", response_model=TaskPublic, status_code=200)
 async def read_task(task_id: int, db: Session = Depends(get_db)) -> Any:
     task = db_task_get(db, task_id)
     if not task:
@@ -47,7 +50,7 @@ async def read_task(task_id: int, db: Session = Depends(get_db)) -> Any:
     return task
 
 
-@app.get("/tasks/", response_model=list[PydanticTask], status_code=200)
+@app.get("/tasks/", response_model=list[TaskPublic], status_code=200)
 async def read_tasks(db: Session = Depends(get_db)) -> Any:
     tasks = db_tasks_get(db)
     if not tasks:
@@ -55,10 +58,10 @@ async def read_tasks(db: Session = Depends(get_db)) -> Any:
     return tasks
 
 
-@app.post("/tasks/", response_model=TaskRead, status_code=201)
+@app.post("/tasks/", response_model=TaskPublic, status_code=201)
 async def create_task(task: TaskCreate, db: Session = Depends(get_db)) -> Any:
-    task = db_task_create(db, task)
-    return task
+    t = db_task_create(db, task)
+    return t
 
 
 @app.put("/tasks/{task_id}")
@@ -79,3 +82,8 @@ async def delete_task(task_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Task not found")
     db_task_delete(db, task_id)
     return {"Task is successfully deleted": "OK"}
+
+
+if __name__ == "__main__":
+    # uvicorn.run("main:app", port=85, host="0.0.0.0",reload=True)
+    uvicorn.run("main:app", reload=True, port=8000, host="0.0.0.0")
