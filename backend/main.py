@@ -1,11 +1,10 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Any
-from sqlalchemy import null
 from sqlalchemy.orm import Session
 from database.database import engine, SessionLocal
 from database.models import Base
-from database.models import TaskPublic, TaskUpdate, TaskCreate, Task
+from database.models import TaskPublic, TaskUpdate, TaskCreate
 import uvicorn
 
 from database.db_crud import (
@@ -37,11 +36,6 @@ def get_db():
         db.close()
 
 
-@app.get("/", status_code=200)
-async def read_root():
-    return {"msg": "OK"}
-
-
 @app.get("/tasks/{task_id}", response_model=TaskPublic, status_code=200)
 async def read_task(task_id: int, db: Session = Depends(get_db)) -> Any:
     task = db_task_get(db, task_id)
@@ -50,7 +44,7 @@ async def read_task(task_id: int, db: Session = Depends(get_db)) -> Any:
     return task
 
 
-@app.get("/tasks/", response_model=list[TaskPublic], status_code=200)
+@app.get("/", response_model=list[TaskPublic], status_code=200)
 async def read_tasks(db: Session = Depends(get_db)) -> Any:
     tasks = db_tasks_get(db)
     if not tasks:

@@ -1,21 +1,25 @@
-@import 'tailwindcss';
+@reference "tailwindcss";
 
 .listing {
-  @apply flex items-center justify-between gap-3 px-3 py-2
-         bg-white border border-gray-200 rounded-md
-         text-sm text-gray-800;
+  @apply w-full rounded-xl border border-gray-200 bg-white p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shadow-sm transition;
 }
 
-.listing + .listing {
-  @apply mt-2;
+.listing:hover {
+  @apply border-gray-300 shadow-md;
 }
 
 .listing-heading {
-  @apply font-normal truncate;
+  @apply text-base font-semibold text-gray-900 leading-snug flex-1;
 }
 
-.listing-assignee {
-  @apply ml-auto text-xs text-gray-600
-         px-2 py-0.5 rounded-md
-         bg-gray-100 border border-gray-200;
+.listing-id {
+  @apply text-sm text-gray-500;
+}
+
+.listing a {
+  @apply inline-block rounded-lg border border-blue-600 px-4 py-1.5 text-sm font-medium text-blue-600 transition;
+}
+
+.listing a:hover {
+  @apply bg-blue-600 text-white no-underline;
 }

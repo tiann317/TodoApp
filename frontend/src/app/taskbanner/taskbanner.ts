@@ -2,7 +2,6 @@ import { Component, input } from '@angular/core';
 import { Taskschema } from '../taskschema';
 import { RouterLink } from "@angular/router";
 
-/*TODO: make the listheading a routerLink to task details*/
 @Component({
   selector: 'app-taskbanner',
   imports: [RouterLink],
@@ -10,7 +9,7 @@ import { RouterLink } from "@angular/router";
   template: `
     <section class="listing">
       <h2 class="listing-heading">{{ task().body }}</h2>
-      <p class="listing-assignee">{{ task().assignee }}</p>
+      <p class="listing-id">#{{ task().id }}</p>
       <a [routerLink]="['/tasks', task().id]">Open</a>
     </section>
   `,
