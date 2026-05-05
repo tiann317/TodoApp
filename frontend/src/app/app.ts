@@ -7,6 +7,7 @@ import { RouterOutlet, RouterLink } from '@angular/router';
   styleUrl: './app.css',
   template: `
     <main class="container page">
+      <p class="my-4 text-lg text-body">Small taskapp to try FastAPI and Angular. Made by Ivan Titov.</p>
       <a [routerLink]="['/']">
         <section>
           <form>

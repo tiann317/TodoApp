@@ -1,7 +1,15 @@
 @reference "tailwindcss";
 
 .container.page {
-  @apply min-h-screen bg-gray-50 px-4 py-4;
+  @apply min-h-screen bg-gray-50;
+}
+
+header {
+  @apply w-full border-b border-gray-200 bg-white shadow-sm px-6 py-4 mb-6;
+}
+
+header p {
+  @apply max-w-6xl mx-auto text-sm sm:text-base text-gray-700 font-medium;
 }
 
 a {
@@ -9,7 +17,7 @@ a {
 }
 
 form {
-  @apply mb-5;
+  @apply px-4 mb-6 max-w-6xl mx-auto;
 }
 
 button.primary {
@@ -21,5 +29,5 @@ button.primary:hover {
 }
 
 .content {
-  @apply max-w-6xl mx-auto;
+  @apply px-4 max-w-6xl mx-auto;
 }
