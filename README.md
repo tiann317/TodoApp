@@ -3,4 +3,6 @@ Backend: FastApi + PostgreSQL
 
 Frontend: Angular + tailwindcss
 
-<img width="2506" height="1268" alt="Screenshot 2026-04-24 at 21-48-05 Task details" src="https://github.com/user-attachments/assets/aa8fa092-aed7-4909-96f2-ce4377c388cd" />
+<img width="2560" height="1472" alt="Screenshot 2026-05-06 at 00-23-51 Home page" src="https://github.com/user-attachments/assets/cca7dfd2-2fad-46ba-b3b7-107842562960" />
+<img width="2560" height="1472" alt="Screenshot 2026-05-06 at 00-24-12 Task details" src="https://github.com/user-attachments/assets/7bd033e1-7290-4159-a1af-75b3cddc8dcc" />
+
