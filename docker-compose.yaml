@@ -1,0 +1,35 @@
+services:
+  pg_sql:
+    image: postgres:17
+    restart: always
+    ports:
+      - 5433:5432
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -p 5432 -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    env_file:
+      - ./backend/.pg_env
+  backend:
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    ports:
+      - 3001:80
+    env_file:
+      - ./backend/.env
+    depends_on:
+      pg_sql:
+        condition: service_healthy
+  frontend:
+    restart: always
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:80
+
